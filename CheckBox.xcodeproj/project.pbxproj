@@ -14,6 +14,9 @@
 		73E15A721B314DA400E40F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E15A711B314DA400E40F59 /* Images.xcassets */; };
 		73E15A751B314DA400E40F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E15A731B314DA400E40F59 /* LaunchScreen.xib */; };
 		73E15A811B314DA400E40F59 /* CheckBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E15A801B314DA400E40F59 /* CheckBoxTests.m */; };
+		73E15A8C1B314E0E00E40F59 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E15A8B1B314E0E00E40F59 /* CheckBox.m */; };
+		73E15A971B31725600E40F59 /* icon_check_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73E15A951B31725600E40F59 /* icon_check_n@2x.png */; };
+		73E15A981B31725600E40F59 /* icon_check_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73E15A961B31725600E40F59 /* icon_check_s@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,10 @@
 		73E15A7A1B314DA400E40F59 /* CheckBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E15A7F1B314DA400E40F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73E15A801B314DA400E40F59 /* CheckBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBoxTests.m; sourceTree = "<group>"; };
+		73E15A8A1B314E0E00E40F59 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
+		73E15A8B1B314E0E00E40F59 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		73E15A951B31725600E40F59 /* icon_check_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check_n@2x.png"; sourceTree = "<group>"; };
+		73E15A961B31725600E40F59 /* icon_check_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check_s@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +88,8 @@
 		73E15A631B314DA400E40F59 /* CheckBox */ = {
 			isa = PBXGroup;
 			children = (
+				73E15A951B31725600E40F59 /* icon_check_n@2x.png */,
+				73E15A961B31725600E40F59 /* icon_check_s@2x.png */,
 				73E15A681B314DA400E40F59 /* AppDelegate.h */,
 				73E15A691B314DA400E40F59 /* AppDelegate.m */,
 				73E15A6B1B314DA400E40F59 /* ViewController.h */,
@@ -89,6 +98,8 @@
 				73E15A711B314DA400E40F59 /* Images.xcassets */,
 				73E15A731B314DA400E40F59 /* LaunchScreen.xib */,
 				73E15A641B314DA400E40F59 /* Supporting Files */,
+				73E15A8A1B314E0E00E40F59 /* CheckBox.h */,
+				73E15A8B1B314E0E00E40F59 /* CheckBox.m */,
 			);
 			path = CheckBox;
 			sourceTree = "<group>";
@@ -200,8 +211,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E15A701B314DA400E40F59 /* Main.storyboard in Resources */,
+				73E15A981B31725600E40F59 /* icon_check_s@2x.png in Resources */,
 				73E15A751B314DA400E40F59 /* LaunchScreen.xib in Resources */,
 				73E15A721B314DA400E40F59 /* Images.xcassets in Resources */,
+				73E15A971B31725600E40F59 /* icon_check_n@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73E15A8C1B314E0E00E40F59 /* CheckBox.m in Sources */,
 				73E15A6D1B314DA400E40F59 /* ViewController.m in Sources */,
 				73E15A6A1B314DA400E40F59 /* AppDelegate.m in Sources */,
 				73E15A671B314DA400E40F59 /* main.m in Sources */,
@@ -348,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CheckBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,6 +373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CheckBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

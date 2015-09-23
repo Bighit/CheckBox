@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "CheckBox.h"
 @interface ViewController ()
 
 @end
@@ -16,6 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CheckBox *box=[[CheckBox alloc]initWithItemTitleArray:@[@"111111",@"2111111",@"311111111",@"4444",@"55",@"66666666",@"777777"] columns:3];
+    [self.view addSubview:box];
+    [box setFrame:CGRectMake(0, 0, self.view.frame.size.width,300)];
+    [box setTextColor:[UIColor redColor]];
+    [box setTextFont:[UIFont systemFontOfSize:10]];
+    [box setNormalImage:[UIImage imageNamed:@"icon_check_n"]];
+    [box setSelectedImage:[UIImage imageNamed:@"icon_check_s"]];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
