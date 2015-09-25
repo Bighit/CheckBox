@@ -7,12 +7,16 @@
 //
 
 #import "CheckBox.h"
+
 @interface CheckBox ()
 {
-    NSMutableArray *_buttonArray;
+    NSMutableArray  *_buttonArray;
+    NSMutableArray  *_buttonLineArray;
 }
 @end
+
 @implementation CheckBox
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,6 +25,7 @@
         _buttonArray = [[NSMutableArray alloc]init];
         self.textColor = [UIColor blackColor];
         self.textFont = [UIFont systemFontOfSize:16];
+        self.alignment = UIControlContentHorizontalAlignmentCenter;
     }
 
     return self;
@@ -33,7 +38,23 @@
     if (self) {
         _buttonArray = [[NSMutableArray alloc]init];
         self.textColor = [UIColor blackColor];
-        self.textFont = [UIFont systemFontOfSize:16];
+        self.textFont = [UIFont systemFontOfSize:14];
+        [self setColumnCount:columnCount];
+        [self setItemTitleWithArray:titleArray];
+    }
+
+    return self;
+}
+
+- (instancetype)initWithItemTitleArray:(NSArray *)titleArray columns:(NSUInteger)columnCount isBottomLine:(BOOL)isBottomLine
+{
+    self = [self init];
+
+    if (self) {
+        self.isBottomLine = isBottomLine;
+        _buttonArray = [[NSMutableArray alloc]init];
+        self.textColor = [UIColor blackColor];
+        self.textFont = [UIFont systemFontOfSize:14];
         [self setColumnCount:columnCount];
         [self setItemTitleWithArray:titleArray];
     }
@@ -47,12 +68,24 @@
         return;
     }
 
+    if (self.isBottomLine) {
+        _buttonLineArray = [[NSMutableArray alloc] init];
+
+        for (NSString *string1 in titleArray) {
+            NSAssert([string1 isKindOfClass:[NSString class]], @"titleArray should only contain string");
+            UIView *view = [[UIView alloc] init];
+            view.backgroundColor = [UIColor whiteColor];
+            [self addSubview:view];
+            [_buttonLineArray addObject:view];
+        }
+    }
+
     for (NSString *string in titleArray) {
         NSAssert([string isKindOfClass:[NSString class]], @"titleArray should only contain string");
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 
-        [button setTitle:[NSString stringWithFormat:@" %@", string] forState:UIControlStateNormal];
-        [button setTitle:[NSString stringWithFormat:@" %@", string] forState:UIControlStateSelected];
+        [button setTitle:[NSString stringWithFormat:@"  %@", string] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"  %@", string] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         [_buttonArray addObject:button];
@@ -88,6 +121,20 @@
     return array;
 }
 
+- (NSArray *)getSelectedItemIndexsStartAtOne
+{
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+
+    for (UIButton *button in _buttonArray) {
+        if (button.selected) {
+            NSNumber *index = [NSNumber numberWithInteger:[_buttonArray indexOfObject:button] + 1];
+            [array addObject:index];
+        }
+    }
+
+    return array;
+}
+
 #pragma mark - buttonclick
 - (void)buttonClick:(UIButton *)button
 {
@@ -99,6 +146,10 @@
         }
 
         button.selected = YES;
+    }
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(checkBoxItemdidSelected:atIndex:checkBox:)]) {
+        [self.delegate checkBoxItemdidSelected:button atIndex:[_buttonArray indexOfObject:button] checkBox:self];
     }
 }
 
@@ -152,6 +203,12 @@
     }
 }
 
+- (void)setAlignment:(UIControlContentHorizontalAlignment)alignment
+{
+    _alignment = alignment;
+    [self refreshButtonFrame];
+}
+
 - (void)refreshButtonFrame
 {
     if (_buttonArray.count == 0) {
@@ -171,16 +228,18 @@
 
     for (UIButton *button in _buttonArray) {
         NSUInteger index = [_buttonArray indexOfObject:button];
+
         [button setFrame:CGRectMake((index % columnCount) * width, (index / columnCount) * height, width, height)];
+
+        [button setContentHorizontalAlignment:self.alignment];
+    }
+
+    if (self.isBottomLine) {
+        for (UIView *view in _buttonLineArray) {
+            NSUInteger index = [_buttonLineArray indexOfObject:view];
+            [view setFrame:CGRectMake(0, (index + 1) * height - 0.5, width, 0.5)];
+        }
     }
 }
-
-/*
- *   // Only override drawRect: if you perform custom drawing.
- *   // An empty implementation adversely affects performance during animation.
- *   - (void)drawRect:(CGRect)rect {
- *    // Drawing code
- *   }
- */
 
 @end
